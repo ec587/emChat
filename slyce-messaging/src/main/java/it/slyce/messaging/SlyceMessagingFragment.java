@@ -138,14 +138,14 @@ public class SlyceMessagingFragment extends Fragment implements OnClickListener 
         this.defaultUserId = defaultUserId;
     }
 
-    public void setStyle(int style) {
+    public void setStyle(int style, int localBubbleBackgroundColor) {
         TypedArray ta = getActivity().obtainStyledAttributes(style, R.styleable.SlyceMessagingTheme);
         this.customSettings.backgroudColor = ta.getColor(R.styleable.SlyceMessagingTheme_backgroundColor, Color.GRAY);
         rootView.setBackgroundColor(this.customSettings.backgroudColor); // the background color
         this.customSettings.timestampColor = ta.getColor(R.styleable.SlyceMessagingTheme_timestampTextColor, Color.BLACK);
         this.customSettings.externalBubbleTextColor = ta.getColor(R.styleable.SlyceMessagingTheme_externalBubbleTextColor, Color.WHITE);
         this.customSettings.externalBubbleBackgroundColor = ta.getColor(R.styleable.SlyceMessagingTheme_externalBubbleBackground, Color.WHITE);
-        this.customSettings.localBubbleBackgroundColor = ta.getColor(R.styleable.SlyceMessagingTheme_localBubbleBackground, Color.WHITE);
+        this.customSettings.localBubbleBackgroundColor = localBubbleBackgroundColor; //ta.getColor(R.styleable.SlyceMessagingTheme_localBubbleBackground, Color.WHITE);
         this.customSettings.localBubbleTextColor = ta.getColor(R.styleable.SlyceMessagingTheme_localBubbleTextColor, Color.WHITE);
         this.customSettings.snackbarBackground = ta.getColor(R.styleable.SlyceMessagingTheme_snackbarBackground, Color.WHITE);
         this.customSettings.snackbarButtonColor = ta.getColor(R.styleable.SlyceMessagingTheme_snackbarButtonColor, Color.WHITE);
@@ -222,7 +222,10 @@ public class SlyceMessagingFragment extends Fragment implements OnClickListener 
         startHereWhenUpdate = 0;
         recentUpdatedTime = 0;
         mRefresher = new Refresher(false);
-        setStyle(R.style.MyTheme);
+
+        // TODO: Set listener for Empatica results and analyze to determine color
+        int emotionColor = Color.MAGENTA;
+        setStyle(R.style.MyTheme, emotionColor);
 
         loadMoreMessagesIfNecessary();
         startLoadMoreMessagesListener();
